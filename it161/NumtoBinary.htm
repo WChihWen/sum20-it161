@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Decimal Number Convert To Binary Number</title>
+    <link rel="stylesheet" type="text/css" href="mcss/Grid.css" />
+
+    <script type="text/javascript" src="js/jquery/jquery-3.5.1.js"></script>
+    <script language="JavaScript" type="text/JavaScript">
+        $(document).ready(function () {
+            $('#BtnConvertToBinary').click(function () {
+                JsMsg.txtID = 'TxtMyNumber'; JsMsg.Msg = '';
+                var nMum = $('#' + JsMsg.txtID).val();
+                if (CheckText('1', nMum, JsMsg)) { NumConvertToBinary(nMum); $('#' + JsMsg.txtID).removeClass('borderRed'); }
+            });
+            $('#BtnConvertToNumber').click(function () {
+                JsMsg.txtID = 'TxtMyBinary'; JsMsg.Msg = '';
+                var str = $('#' + JsMsg.txtID).val();
+                if (CheckText('2', str, JsMsg)) { BinaryConvertToNum(str); $('#' + JsMsg.txtID).removeClass('borderRed'); }
+            });
+        });
+
+        // setting value
+        var JsMsg = { txtID: '', Msg: '' }
+        var AryNumber = [128, 64, 32, 16, 8, 4, 2, 1];
+
+        // functions
+        function NumConvertToBinary(_myNum) {
+            var strB = '';
+            var nNum = _myNum;
+            //one way: minus
+            //from left to right
+            if (nNum <= 255) {
+                for (i = 0; i <= AryNumber.length - 1; i += 1) {
+                    if (nNum - AryNumber[i] >= 0) {
+                        nNum = nNum - AryNumber[i];
+                        strB += 1;
+                    } else {
+                        strB += 0;
+                    }
+                }
+                $('#divShow').html('1: The binary is "' + strB + '"');
+            } else { $('#divShow').html('1: The number (' + _myNum + ') is more than 255'); }
+
+            
+            //other way: number divided by 2
+            // from right to left
+            nNum = _myNum;
+            strB = '';
+            var nRmder = 0;
+            while (nNum >= 1) {
+                nRmder = (nNum % 2);
+                strB = nRmder + strB;
+                nNum = (nNum - nRmder) / 2;                
+            }
+            $('#divTest').html('2: The binary is "' + (_myNum == 0 ? 0 : strB) + '"');
+        }
+
+        function BinaryConvertToNum(_str) {
+            //2 to the 3rd power ==> Math.pow(2,3)
+            var strOut = ''; numOut = 0;power = 0;
+            for (i = _str.length; i > 0; i--) {
+                if (_str.substring(i, i - 1) == '1') {
+                    numOut += parseInt(Math.pow(2, power));
+                    strOut += parseInt(Math.pow(2, power)) + '+';
+                }
+                power += 1;               
+            }
+
+            $('#divShow').html((strOut.length >= 1 ? strOut.substring(0, strOut.length - 1) : strOut));
+            $('#divTest').html('Result: The Decimal Number is ' + numOut);
+        }
+
+        function CheckText(_type, _strChk, _JsMsg) {
+            //'1': 'Check input whether it is a number'
+            //'2': 'Check input whether it is a binary number' 
+            switch (_type) {
+                case '1':
+                    if (isNaN(_strChk)) {
+                        _JsMsg.Msg = 'It requires a number.';
+                        $('#' + _JsMsg.txtID).addClass('borderRed'); $('#divShow').html(_JsMsg.Msg);
+                        return false;
+                    } else {
+                        return true;
+                    }
+                    break;
+                case '2':
+                    return true;
+                    break;
+                default:
+            }
+        }          
+    </script> 
+</head>
+<body >
+    <br /><br />
+    <table class="Grid" >
+        <tr>
+            <th>Number convert to Binary</th>
+            <td>
+                <input id="TxtMyNumber" name="TxtMyNumber" style="width: 150px" type="text"/>
+                <input id="BtnConvertToBinary"  name="BtnConvertToBinary" class="btn" type="button" value="Convert" />                              
+            </td>
+        </tr>
+        <tr>
+            <th>Binary convert to Number</th>
+            <td>
+            <input id="TxtMyBinary" name="TxtMyBinary" style="width: 150px" type="text"/>
+            <input id="BtnConvertToNumber"  name="BtnConvertToNumber" class="btn" type="button" value="Convert" />                              
+            </td>
+        </tr>        
+        <tr>
+            <td colspan="2">
+                <div id="divShow">Hello world!</div>
+                <div id="divTest">Hello world!</div>
+            </td>
+        </tr>
+    </table>    
+    <br />
+    
+</body>
+</html>

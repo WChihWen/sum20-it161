@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>ITC102</title>
+    <link rel="stylesheet" type="text/css" href="mcss/Grid.css" />
+    <script type="text/javascript" src="js/jquery/jquery-3.5.1.js"></script>
+
+    <script language="JavaScript" type="text/JavaScript">
+        $(document).ready(function () {
+            CreateHomeworkTable();
+        });
+
+        function CreateHomeworkTable() {
+            var str = '';
+            var JsData = [
+                { Names: 'Wk1: Explore IT Jobs', Links: 'ITC102/ExploreITJobs__ChihWenWang.docx' },
+                { Names: 'Wk1: Read Mod 1', Links: 'ITC102/Wk1__ChihWenWang.docx' },
+                { Names: 'Wk2: Read Mod 2', Links: 'ITC102/Wk2__ChihWenWang.docx' },
+                { Names: 'Wk3: Read Mod 3', Links: 'ITC102/Wk3__ChihWenWang.docx' },
+                { Names: 'Wk4: Read Mod 4', Links: 'ITC102/Wk4__ChihWenWang.docx' },
+                { Names: 'Wk5: Read Mod 5', Links: 'ITC102/Wk5__ChihWenWang.docx' },
+                { Names: 'Wk6: Read Mod 6', Links: 'ITC102/Wk6__ChihWenWang.docx' },
+                { Names: 'Wk7: Read Mod 7', Links: 'ITC102/Wk7__ChihWenWang.docx' },
+                { Names: 'Wk8: Read Mod 8', Links: 'ITC102/Wk8__ChihWenWang.docx' },
+                { Names: 'Wk9: Read Mod 9', Links: 'ITC102/Wk9__ChihWenWang.docx' },
+                { Names: 'Wk10: Read Mod 10', Links: 'ITC102/Wk10__ChihWenWang.docx' },
+                { Names: 'Mod 12: TALKS', Links: 'ITC102/ITC102 Presentation.pptx' },
+                { Names: 'Ex Cred: Read F01-F039', Links: 'ITC102/F01-F039__ChihWenWang.docx' }
+            ];
+
+
+            str += '<table class="Grid">';
+            str += '<tr><th colspan="3"> Homework</th></tr>';
+
+            for (i = 0; i <= JsData.length - 1; i++) {
+                str += '<tr>';
+                str += '<th style="width:30px">' + (i + 1) + '</th>';
+                str += '<td style="width:240px">' + JsData[i].Names + '</td>';
+                str += '<td style="width:40px"><a href="' + JsData[i].Links + '">Link</a></td>';
+                str += '</tr>';
+            }
+            str += '</table>';
+
+            $('#divHomework').html(str);
+        }
+
+    </script> 
+</head>
+<body>
+     <br />
+        <table align="center">
+            <tr>
+                <td align="center" style=" height:50px; font-size:large; font-weight:bold; color: #004080">ITC 102 Information Systems Concepts<br /></td>
+                
+            </tr>
+            <tr>
+                <td>
+                    <div id="divHomework"></div>
+                </td>
+            </tr>                   
+        </table>
+</body>
+</html>
